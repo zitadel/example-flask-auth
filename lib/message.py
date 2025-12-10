@@ -1,4 +1,4 @@
-from typing import List, Union, Dict
+from typing import Dict, List, Union
 
 
 def _signin_error_message(error_code: str) -> Dict[str, str]:
@@ -20,9 +20,7 @@ def _signin_error_message(error_code: str) -> Dict[str, str]:
     if error_code == "oauthaccountnotlinked":
         return {
             "heading": "Account Not Linked",
-            "message": (
-                "To confirm your identity, sign in with the same account you used originally."
-            ),
+            "message": ("To confirm your identity, sign in with the same account you used originally."),
         }
 
     if error_code == "emailsignin":
@@ -53,9 +51,7 @@ def _auth_error_message(error_code: str) -> Dict[str, str]:
     if error_code == "configuration":
         return {
             "heading": "Server Error",
-            "message": (
-                "There is a problem with the server configuration. Check the server logs for more information."
-            ),
+            "message": ("There is a problem with the server configuration. Check the server logs for more information."),
         }
 
     if error_code == "accessdenied":
@@ -67,9 +63,7 @@ def _auth_error_message(error_code: str) -> Dict[str, str]:
     if error_code == "verification":
         return {
             "heading": "Sign-in Link Invalid",
-            "message": (
-                "The sign-in link is no longer valid. It may have been used already or it may have expired."
-            ),
+            "message": ("The sign-in link is no longer valid. It may have been used already or it may have expired."),
         }
 
     return {

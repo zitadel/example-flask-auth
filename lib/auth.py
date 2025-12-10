@@ -1,7 +1,7 @@
 import base64
 import hashlib
 import secrets
-from typing import Any, Dict, Tuple, Optional
+from typing import Any, Dict, Optional, Tuple
 from urllib.parse import urlencode
 
 import requests
@@ -29,9 +29,7 @@ def get_well_known_url(domain: str) -> str:
 
 def generate_pkce() -> Tuple[str, str]:
     verifier = secrets.token_urlsafe(64)
-    challenge = base64.urlsafe_b64encode(
-        hashlib.sha256(verifier.encode("ascii")).digest()
-    ).rstrip(b"=").decode("ascii")
+    challenge = base64.urlsafe_b64encode(hashlib.sha256(verifier.encode("ascii")).digest()).rstrip(b"=").decode("ascii")
     return verifier, challenge
 
 
@@ -42,9 +40,7 @@ def get_session() -> Optional[Dict[str, Any]]:
 @auth_bp.route("/signin")
 def signin() -> Any:
     error = request.args.get("error")
-    providers = [
-        {"id": "zitadel", "name": "ZITADEL", "callbackUrl": config.ZITADEL_CALLBACK_URL}
-    ]
+    providers = [{"id": "zitadel", "name": "ZITADEL", "callbackUrl": config.ZITADEL_CALLBACK_URL}]
     return render_template(
         "auth/signin.html",
         providers=providers,
@@ -122,9 +118,7 @@ def callback() -> Any:
 @auth_bp.route("/logout", methods=["POST"])
 def logout() -> Any:
     session.clear()
-    well_known = requests.get(
-        get_well_known_url(config.ZITADEL_DOMAIN), timeout=REQUEST_TIMEOUT
-    ).json()
+    well_known = requests.get(get_well_known_url(config.ZITADEL_DOMAIN), timeout=REQUEST_TIMEOUT).json()
     end_session = well_known.get("end_session_endpoint")
     if end_session:
         params = {
