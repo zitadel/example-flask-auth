@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
-oauth = OAuth()
+oauth = OAuth() # type: ignore[no-untyped-call]
 
 
 def get_well_known_url(domain: str) -> str:
@@ -28,8 +28,8 @@ def get_well_known_url(domain: str) -> str:
 
 def init_oauth(app: Flask) -> None:
     """Initialize OAuth client with Flask app context."""
-    oauth.init_app(app)
-    oauth.register(
+    oauth.init_app(app) # type: ignore[no-untyped-call]
+    oauth.register( # type: ignore[no-untyped-call]
         name="zitadel",
         client_id=config.ZITADEL_CLIENT_ID,
         client_secret=config.ZITADEL_CLIENT_SECRET,

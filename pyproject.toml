@@ -31,6 +31,7 @@ pytest-cov = ">=4.0.0"
 mypy = ">=1.5"
 ruff = ">=0.12.4"
 fawltydeps = "0.19.0"
+types-authlib = "^1.6.5.20251005"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -55,10 +56,6 @@ omit = []
 files = ["."]
 strict = true
 exclude = ["build", "dist", ".venv", ".devbox"]
-
-[[tool.mypy.overrides]]
-module = ["authlib.*"]
-ignore_missing_imports = true
 
 [tool.ruff]
 line-length = 130
